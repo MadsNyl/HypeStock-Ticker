@@ -1,0 +1,8 @@
+CREATE TABLE ticker (
+    symbol varchar(10),
+    name varchar(255),
+    exchange varchar(255),
+    legacy boolean DEFAULT FALSE,
+    created_date datetime DEFAULT NOW(),
+    PRIMARY KEY (symbol)
+);

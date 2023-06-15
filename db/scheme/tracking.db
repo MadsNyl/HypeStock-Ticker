@@ -1,0 +1,9 @@
+CREATE TABLE tracking(
+    symbol varchar(10),
+    last_price float,
+    volume varchar(255),
+    marketcap varchar(255),
+    price_change_pct float,
+    date datetime DEFAULT NOW(),
+    FOREIGN KEY (symbol) REFERENCES ticker (symbol)
+);

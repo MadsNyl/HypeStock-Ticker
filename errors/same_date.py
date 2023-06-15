@@ -1,0 +1,4 @@
+
+
+class SameDateException(Exception):
+    pass
