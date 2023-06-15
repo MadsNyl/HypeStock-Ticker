@@ -8,7 +8,6 @@ class TrackingIndex(Enum):
 
 
 class TrackingJson(Enum):
-    SYMBOL = "symbol"
     LAST_PRICE = "lastsale"
     VOLUME = "volume"
     MARKETCAP = "marketCap"

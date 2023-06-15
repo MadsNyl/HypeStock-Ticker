@@ -3,7 +3,7 @@ from datetime import datetime
 from errors import SameDateException
 from db import INSERT, GET
 from classes import Ticker, Tracking
-from enums import TrackingJson
+from enums import TrackingJson, TickerJson
 
 
 TICKER_SYMBOLS = GET.tickers()
@@ -18,12 +18,13 @@ def get_ticker_trackings(url: str, exchange: str) -> None:
         raise SameDateException("The last tracking stored in DB is now.")
     
     json = http_get(url).json()
-    
-    for object in json:
 
+    for object in json:
+        
+        symbol = object[TickerJson.SYMBOL.value].strip()
         ticker = Ticker(
-            symbol=object["symbol"],
-            name=object["name"],
+            symbol=symbol,
+            name=object[TickerJson.NAME.value],
             exchange=exchange
         )
 
@@ -33,14 +34,14 @@ def get_ticker_trackings(url: str, exchange: str) -> None:
         price_change_pct = object[TrackingJson.PRICE_CHANGE_PCT.value][:-1]
 
         tracking = Tracking(
-            symbol=ticker.symbol,
+            symbol=symbol,
             last_price=float(last_price) if len(last_price) else None,
             volume=volume,
             marketcap=marketcap[:-3],
             price_change_pct=float(price_change_pct) if price_change_pct else None
         )
 
-        if object["symbol"] not in TICKER_SYMBOLS:
+        if symbol not in TICKER_SYMBOLS:
             INSERT.ticker(ticker)
         
         INSERT.tracking(tracking)

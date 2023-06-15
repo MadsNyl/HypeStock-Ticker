@@ -1,6 +1,7 @@
 from app import TickerInserter
 from util import http_get
 from settings import TICKER_DATA
+from enums import TickerJson
 
 
 def insert_ticker(data: dict) -> None:
@@ -11,9 +12,9 @@ def insert_ticker(data: dict) -> None:
 
     for object in json:
         ticker = inserter.create(
-            symbol=object["symbol"],
-            name=object["name"],
-            exchange=data["exchange"]
+            symbol=object[TickerJson.SYMBOL.value].strip(),
+            name=object[TickerJson.NAME.value],
+            exchange=data[TickerJson.EXCHANGE.value]
         )
         inserter.insert(ticker)
 

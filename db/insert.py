@@ -34,6 +34,8 @@ class INSERT():
                 QUERY.insert_ticker(),
                 tickers
             )
+
+            db.commit()
         except Exception as e:
             print(f"Bulk insertion of tickers error: {e}")
 
@@ -53,6 +55,8 @@ class INSERT():
                     tracking.price_change_pct
                 )
             )
+
+            db.commit()
         except Exception as e:
             print(f"Insertion of tracking error: {e}")
 
