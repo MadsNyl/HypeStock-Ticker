@@ -5,5 +5,7 @@ CREATE TABLE tracking(
     marketcap varchar(255),
     price_change_pct float,
     date datetime DEFAULT NOW(),
-    FOREIGN KEY (symbol) REFERENCES ticker (symbol)
+    FOREIGN KEY (symbol) 
+    REFERENCES ticker (symbol)
+    ON DELETE CASCADE
 );

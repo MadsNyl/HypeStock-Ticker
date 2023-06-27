@@ -4,6 +4,6 @@ CREATE TABLE ticker (
     exchange varchar(255),
     legacy boolean DEFAULT FALSE,
     created_date datetime DEFAULT NOW(),
-    PRIMARY KEY (symbol),
-    FOREIGN KEY (symbol)
+    cik int,
+    PRIMARY KEY (symbol)
 );

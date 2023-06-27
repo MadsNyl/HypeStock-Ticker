@@ -33,3 +33,11 @@ class QUERY():
             ORDER BY date DESC
             LIMIT 1
         """
+    
+    @staticmethod
+    def update_cik() -> str:
+        return """
+            UPDATE ticker
+            SET cik = %s
+            WHERE symbol = %s;
+        """
